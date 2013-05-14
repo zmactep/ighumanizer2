@@ -1,0 +1,10 @@
+#!/bin/bash
+
+ENV=`which env`
+PYTHON=`which python`
+BASEDIR=`dirname $0`
+CURDIR=`pwd`
+
+cd $BASEDIR
+$ENV PYTHONPATH=.. $PYTHON filter_fasta.py $@
+cd $CURDIR
