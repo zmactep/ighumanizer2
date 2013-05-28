@@ -98,7 +98,7 @@ class BlastOutIg(object):
 
 ##########################
 
-def runIgBlastp( query, germlineSpecie, domainSystem = DOMAIN_IMGT, 
+def runIgBlastp( query, germlineSpecie = GERMLINE_HUMAN, domainSystem = DOMAIN_IMGT,
                  additionalDB = None, numThreads = 4, numAlignments = 10, outfmt = 3, out = None ):
     igblastp = os.path.join(os.path.join('.', IGBLAST_BIN), "igblastp")
     params = []

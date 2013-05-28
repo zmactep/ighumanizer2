@@ -2,7 +2,7 @@ __author__ = 'mactep'
 
 import PyQt4
 from PyQt4 import QtGui
-from extra.gui.View.ViewForms.MainWindow import Ui_MainWindow
+from extra.gui.components.ViewForms.MainWindow import Ui_MainWindow
 
 from PyQt4.QtCore import pyqtSlot, pyqtSignal, QObject, SIGNAL, QString
 
@@ -12,7 +12,8 @@ from extra.share.fasta_tools import readFASTA,parseFASTA2IG
 from extra.share import igblastp_tools
 from extra.share.igblastp_tools import runIgBlastp, parseIgBlastpOut
 
-from extra.gui.AminoColors import AMINO_COLORS
+from extra.gui.components.Common.AminoColors import AMINO_COLORS
+
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):

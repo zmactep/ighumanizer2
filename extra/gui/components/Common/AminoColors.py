@@ -27,6 +27,7 @@ from PyQt4.QtGui import QColor
 
 AMINO_COLORS = {}
 
+
 class AAColors(object):
     def __init__(self):
         self.light_green = QColor(0x77, 0xdd, 0x88)
@@ -69,6 +70,3 @@ AMINO_COLORS["P"] = ac.pink
 
 AMINO_COLORS["S"] = ac.red
 AMINO_COLORS["T"] = ac.red
-
-
-

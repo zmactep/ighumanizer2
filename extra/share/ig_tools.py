@@ -78,6 +78,9 @@ class Domain(object):
             return self.getFR(number)
         return None
 
+    def generatedSeq(self):
+        return self.fr[0] + self.cdr[0] + self.fr[1] + self.cdr[1] + self.fr[2] + self.cdr[2] + self.tail
+
 # class Ig(object):
 # 	def __init__(self, name):
 # 		self.name = name
