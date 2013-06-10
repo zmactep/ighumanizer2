@@ -49,7 +49,7 @@ class HumanizationModel(QObject):
             self.mainwindow.ui.tableHumanizations.setColumnCount(tablecol)
             self.mainwindow.ui.tableHumanizations.setRowCount(tablerow)
             for i, variant in enumerate(domain.humanizeDomDict):
-                seq = domain.humanizeeDomDict[variant].generatedSeq()
+                seq = domain.humanizeDomDict[variant].generatedSeq()
                 self.setupHumanization(seq, i)
             for table in [self.mainwindow.ui.tableDomainHum,
                           self.mainwindow.ui.tableHumanizations]:

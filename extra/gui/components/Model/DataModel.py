@@ -3,6 +3,8 @@ __author__ = 'mactep'
 from PyQt4.QtCore import *
 from extra.gui.components.Model.FastaModel import FastaModel
 
+from extra.share.humanize_tools import runMethod
+
 
 class DataModel(QObject):
     # Signals
@@ -32,6 +34,7 @@ class DataModel(QObject):
     @pyqtSlot(name="loadData")
     def loadData(self, fileList):
         self.data.loadData(fileList)
+        self.currentDomain = None
         self.dataModelChanged.emit()
         self.currentDomainChanged.emit()
 
@@ -57,10 +60,17 @@ class DataModel(QObject):
 
     @pyqtSlot(name="runBLAST")
     def runBLAST(self):
-        pass
+        if self.currentDomain:
+            self.data.rerunBLAST(self.currentDomain, self.configuration)
+            self.currentDomainChanged.emit()
+
+    @pyqtSlot(name="runTotalBLAST")
+    def runTotalBLAST(self):
+        self.data.rerunTotalBLAST_slow(self.configuration)
         self.currentDomainChanged.emit()
 
     @pyqtSlot(name="runHumanization")
     def runHumanization(self):
-        pass
-        self.currentDomainChanged.emit()
+        if self.currentDomain:
+            runMethod(self.currentDomain, self.humanizationMethod)
+            self.currentDomainChanged.emit()

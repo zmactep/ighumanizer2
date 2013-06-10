@@ -1,3 +1,17 @@
 ncbi-igblast
 *.pyc
 .idea
+*.phd
+*.phi
+*.phr
+*.pin
+*.pnd
+*.pni
+*.pog
+*.ppd
+*.ppi
+*.psd
+*.psi
+*.psq
+*.pal
+*.gil

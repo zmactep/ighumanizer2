@@ -60,7 +60,7 @@ class HomologsModel(QObject):
             self.mainwindow.ui.tableHomologs.setColumnCount(tablecol)
             self.mainwindow.ui.tableHomologs.setRowCount(tablerow)
             for i, homolog in enumerate(domain.homologDomDict):
-                seq = domain.homologDict[homolog].generatedSeq()
+                seq = domain.homologDomDict[homolog].generatedSeq()
                 self.setupHomolog(seq, False, i)
             for table in [self.mainwindow.ui.tableDomain,
                           self.mainwindow.ui.tableGermlines,

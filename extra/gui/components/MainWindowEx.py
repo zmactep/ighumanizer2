@@ -10,6 +10,9 @@ from extra.gui.components.Model.DataModel import DataModel
 from extra.gui.components.Model.RegionsModel import RegionsModel
 from extra.gui.components.Model.HomologsModel import HomologsModel
 from extra.gui.components.Model.HumanizationModel import HumanizationModel
+from extra.gui.components.Model.InfoModel import InfoModel
+
+from extra.gui.components.ConfigurationPanel import ConfigurationPanel
 
 from extra.share.humanize_tools import getMethods
 
@@ -34,6 +37,7 @@ class MainWindowEx(QMainWindow):
         self.dataModel = DataModel(self.configuration)
 
         # Ui
+        self._init_long_process_mb()
         self._init_domain_menu()
         self._init_humanization_menu()
         self._init_toolbar()
@@ -43,6 +47,7 @@ class MainWindowEx(QMainWindow):
         self.regionsView = RegionsModel(self)
         self.homologsView = HomologsModel(self)
         self.humanizationsView = HumanizationModel(self)
+        self.infoView = InfoModel(self)
 
         # Actions
         self._init_icons()
@@ -63,6 +68,11 @@ class MainWindowEx(QMainWindow):
         self.ui.action_Help.setIcon(QIcon().fromTheme("help-contents"))
 
     # Ui
+    def _init_long_process_mb(self):
+        self.waitMB = QMessageBox(QMessageBox.Information, "BLAST", "In progress. Please, wait.",
+                                  QMessageBox.NoButton, self)
+        self.waitMB.setStandardButtons(QMessageBox.NoButton)
+
     def _init_domain_menu(self):
         for model in self.configuration.getDomainModels():
             self.domainList.append(QAction(model, self))
@@ -129,13 +139,22 @@ class MainWindowEx(QMainWindow):
     def _init_actions_map(self):
         self.ui.action_Open.triggered.connect(self.openFiles)
         self.ui.action_Close.triggered.connect(self.closeFiles)
-        self.ui.actionCreate_report.triggered.connect(self.createReport)
-        self.ui.actionConfigure_settings.triggered.connect(self.configureSettings)
-        self.ui.actionRun.triggered.connect(self.runBLAST)
-        self.ui.actionHumanize.triggered.connect(self.runHumanization)
         self.ui.action_About.triggered.connect(self.about)
         self.ui.actionAbout_Qt.triggered.connect(QtGui.qApp.aboutQt)
         self.ui.action_Help.triggered.connect(self.help)
+        self.ui.actionConfigure_settings.triggered.connect(self.openConfigurationDialog)
+        self.ui.actionCreate_report.triggered.connect(self.createReport)
+        self.ui.butProc.clicked.connect(self.createReport)
+
+        self.ui.actionRun.triggered.connect(self.runBLAST)
+        self.ui.butProcAll.clicked.connect(self.runTotalBLAST)
+        self.ui.actionHumanize.triggered.connect(self.runHumanization)
+
+        self.ui.tableDomain.cellDoubleClicked.connect(self.showInfo)
+        self.ui.tableDomainHum.cellDoubleClicked.connect(self.showInfo)
+        self.ui.tableGermlines.cellDoubleClicked.connect(self.showInfo)
+        self.ui.tableHomologs.cellDoubleClicked.connect(self.showInfo)
+        self.ui.tableHumanizations.cellDoubleClicked.connect(self.showInfo)
 
     def _init_data_actions_map(self):
         self.dataModel.dataModelChanged.connect(self.buildDataTree)
@@ -155,6 +174,7 @@ class MainWindowEx(QMainWindow):
         self.regionsView.viewDomain(domain)
         self.homologsView.viewDomain(domain)
         self.humanizationsView.viewDomain(domain)
+        self.infoView.cleanup()
 
     @pyqtSlot(name="changeCurrentDomain")
     def changeCurrentDomain(self):
@@ -205,17 +225,25 @@ class MainWindowEx(QMainWindow):
     def createReport(self):
         pass
 
-    @pyqtSlot(name="configureSettings")
-    def configureSettings(self):
-        pass
-
     @pyqtSlot(name="runBLAST")
     def runBLAST(self):
         self.dataModel.runBLAST()
+        self.waitMB.setVisible(False)
+
+    @pyqtSlot(name="runTotalBLAST")
+    def runTotalBLAST(self):
+        self.dataModel.runTotalBLAST()
+        self.waitMB.setVisible(False)
 
     @pyqtSlot(name="runHumanization")
     def runHumanization(self):
         self.dataModel.runHumanization()
+        self.waitMB.setVisible(False)
+
+    @pyqtSlot(name="showInfo")
+    def showInfo(self):
+        table = self.sender()
+        self.infoView.viewPosition(table)
 
     @pyqtSlot(name="about")
     def about(self):
@@ -259,6 +287,8 @@ class MainWindowEx(QMainWindow):
         # Update data model
         self.dataModel.setHumanizationMethod(method)
 
-    @pyqtSlot(name="getDomainByTree")
-    def getDomainByTree(self):
-        pass
+    @pyqtSlot(name="openConfigurationDialog")
+    def openConfigurationDialog(self):
+        dialog = ConfigurationPanel(self.configuration)
+        dialog.setModal(True)
+        dialog.exec_()

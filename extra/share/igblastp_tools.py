@@ -49,6 +49,7 @@ from . import ig_tools
 
 ##########################
 
+
 class BlastOutDomain(object):
     def __init__(self, domain):
         self.domain = domain
@@ -60,6 +61,7 @@ class BlastOutDomain(object):
 
     def getDomain(self):
         return self.domain
+
 
 class BlastOutIg(object):
     def __init__(self, name):

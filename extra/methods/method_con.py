@@ -52,7 +52,7 @@ def humanization_algorithm( domain ):
                 tmp_variants[frN-1].append(to_change)
 
     # Second pass. Process tmp_variants
-    frs  = [humanizeFR(domain.getDomain().getFR(i), tmp_variants[i-1]) for i in [1,2,3]]
+    frs = [humanizeFR(domain.getDomain().getFR(i), tmp_variants[i-1]) for i in [1,2,3]]
     hum_result = {}
     counter = 0
     for fr1 in frs[0]:
@@ -63,6 +63,7 @@ def humanization_algorithm( domain ):
                 d = ig_tools.Domain((n, ""))
                 d.cdr = domain.getDomain().cdr
                 d.fr = [fr1, fr2, fr3]
+                d.seq = d.fr[0] + d.cdr[0] + d.fr[1] + d.cdr[1] + d.fr[2] + d.cdr[2]
                 hum_result[n] = d
 
     domain.humanizeDomDict = hum_result

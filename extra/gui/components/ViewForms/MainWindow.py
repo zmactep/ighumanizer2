@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/MainWindow.ui'
 #
-# Created: Mon May 27 22:56:42 2013
+# Created: Mon Jun 10 17:46:59 2013
 #      by: PyQt4 UI code generator 4.10.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -420,12 +420,12 @@ class Ui_MainWindow(object):
         self.tabIgWidget.addTab(self.tabHumanization, _fromUtf8(""))
         self.verticalLayout.addWidget(self.tabIgWidget)
         self.groupBox = QtGui.QGroupBox(self.widget)
-        self.groupBox.setEnabled(False)
+        self.groupBox.setEnabled(True)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.gridLayout_2 = QtGui.QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.tabInfoWidget = QtGui.QTabWidget(self.groupBox)
-        self.tabInfoWidget.setEnabled(False)
+        self.tabInfoWidget.setEnabled(True)
         self.tabInfoWidget.setObjectName(_fromUtf8("tabInfoWidget"))
         self.tabInfo = QtGui.QWidget()
         self.tabInfo.setObjectName(_fromUtf8("tabInfo"))
@@ -437,7 +437,7 @@ class Ui_MainWindow(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout_3.addWidget(self.label)
         self.lineName = QtGui.QLineEdit(self.tabInfo)
-        self.lineName.setEnabled(False)
+        self.lineName.setEnabled(True)
         self.lineName.setMinimumSize(QtCore.QSize(100, 0))
         self.lineName.setReadOnly(True)
         self.lineName.setObjectName(_fromUtf8("lineName"))
@@ -449,7 +449,7 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.horizontalLayout_4.addWidget(self.label_2)
         self.lineSeq = QtGui.QLineEdit(self.tabInfo)
-        self.lineSeq.setEnabled(False)
+        self.lineSeq.setEnabled(True)
         self.lineSeq.setMinimumSize(QtCore.QSize(100, 0))
         self.lineSeq.setReadOnly(True)
         self.lineSeq.setObjectName(_fromUtf8("lineSeq"))
@@ -477,10 +477,7 @@ class Ui_MainWindow(object):
         self.tableAminoAcid.verticalHeader().setDefaultSectionSize(30)
         self.verticalLayout_3.addWidget(self.tableAminoAcid)
         self.tabInfoWidget.addTab(self.tabInfo, _fromUtf8(""))
-        self.tabGraphics = QtGui.QWidget()
-        self.tabGraphics.setObjectName(_fromUtf8("tabGraphics"))
-        self.tabInfoWidget.addTab(self.tabGraphics, _fromUtf8(""))
-        self.gridLayout_2.addWidget(self.tabInfoWidget, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.tabInfoWidget, 0, 0, 1, 1)
         self.verticalLayout.addWidget(self.groupBox)
         self.horizontalLayout.addWidget(self.widget)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -635,7 +632,6 @@ class Ui_MainWindow(object):
         item = self.tableAminoAcid.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Homolog part", None))
         self.tabInfoWidget.setTabText(self.tabInfoWidget.indexOf(self.tabInfo), _translate("MainWindow", "&Info", None))
-        self.tabInfoWidget.setTabText(self.tabInfoWidget.indexOf(self.tabGraphics), _translate("MainWindow", "&Graphics", None))
         self.menu_File.setTitle(_translate("MainWindow", "&File", None))
         self.menu_Q.setTitle(_translate("MainWindow", "?", None))
         self.menuTool.setTitle(_translate("MainWindow", "&Tools", None))
@@ -646,7 +642,7 @@ class Ui_MainWindow(object):
         self.treeWidget.headerItem().setText(0, _translate("MainWindow", "Ig", None))
         self.treeWidget.headerItem().setText(1, _translate("MainWindow", "Seq", None))
         self.treeWidget.headerItem().setText(2, _translate("MainWindow", "PTH", None))
-        self.butProc.setText(_translate("MainWindow", "Process", None))
+        self.butProc.setText(_translate("MainWindow", "Report", None))
         self.butProcAll.setText(_translate("MainWindow", "Process all", None))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar", None))
         self.action_Open.setText(_translate("MainWindow", "&Open", None))

@@ -78,6 +78,15 @@ class Domain(object):
             return self.getFR(number)
         return None
 
+    def getRegionByPos(self, pos):
+        npos = pos
+        for reg in ["FR1", "CDR1", "FR2", "CDR2", "FR3", "CDR3"]:
+            region = self.get(reg)
+            if npos < len(region):
+                return reg, region[npos]
+            npos -= len(region)
+        return None
+
     def generatedSeq(self):
         return self.fr[0] + self.cdr[0] + self.fr[1] + self.cdr[1] + self.fr[2] + self.cdr[2] + self.tail
 
